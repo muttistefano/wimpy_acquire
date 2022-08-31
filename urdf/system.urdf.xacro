@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<robot name="eureca" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="prefix" default="" />
+  
+  <gazebo reference="base_footprint">
+    <static>true</static>
+  </gazebo>
+
+
+  <xacro:include filename="$(find wimpy_acquire)/urdf/sweepee/sweepee.xacro" />
+  
+
+  <xacro:property name="M_PI" value="3.14159"/>
+
+  <xacro:sweepee  prefix="$(arg prefix)">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:sweepee>
+
+  <!-- <xacro:sweepee_gazebo /> -->
+
+
+  <!-- <gazebo reference="world">
+  </gazebo> -->
+  <!-- <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <robot_param>robot_description</robot_param>
+      <robot_namespace>$(arg prefix)</robot_namespace>
+      <robot_param_node>robot_state_publisher</robot_param_node>
+        <parameters>$(find wimpy_acquire)/config/config.yaml</parameters>
+    </plugin>
+  </gazebo> -->
+
+  <!-- <gazebo>
+    <plugin name="hand_of_god" filename="libgazebo_ros_hand_of_god.so">
+      <link_name>test_pd::pdpdpd</link_name>
+      <frame_id>pdpdpd</frame_id>
+      <ka>200</ka>
+      <kl>200</kl>
+    </plugin>
+  </gazebo> -->
+
+<!-- <gazebo>
+    <plugin filename="libign_ros2_control-system.so" name="ign_ros2_control">
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher</robot_param_node>
+    </plugin>
+</gazebo> -->
+
+</robot>
