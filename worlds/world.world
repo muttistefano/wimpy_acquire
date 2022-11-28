@@ -70,6 +70,7 @@
     <atmosphere type='adiabatic'/>
     <physics type='ode'>
       <max_step_size>0.001</max_step_size>
+      <enable>0</enable>
       <real_time_factor>1</real_time_factor>
       <real_time_update_rate>1000</real_time_update_rate>
     </physics>
@@ -87,6 +88,7 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <model name='b11'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -644,6 +646,7 @@
       <pose>-2.85427 -1.08738 0 0 -0 0</pose>
     </model>
     <model name='b10'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -1201,6 +1204,7 @@
       <pose>-1.96191 1.13258 0 0 -0 0</pose>
     </model>
     <model name='b9'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -1758,6 +1762,7 @@
       <pose>1.26633 4.44379 -0.001057 -1e-06 -0.00043 0</pose>
     </model>
     <model name='b0'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -2315,6 +2320,7 @@
       <pose>3.44377 2.99273 -0.001057 -1e-06 -0.00043 0</pose>
     </model>
     <model name='b1'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -2872,6 +2878,7 @@
       <pose>4.95617 0.752284 -0.001057 -1e-06 -0.00043 0</pose>
     </model>
     <model name='b2'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -3429,6 +3436,7 @@
       <pose>2 2 -0.001057 -1e-06 -0.00043 0</pose>
     </model>
     <model name='b3'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -3986,6 +3994,7 @@
       <pose>-1 4 -0.001057 -1e-06 -0.00043 0</pose>
     </model>
     <model name='b4'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -4543,6 +4552,7 @@
       <pose>-2 3 -0.001057 -1e-06 -0.00043 0</pose>
     </model>
     <model name='b5'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -5100,6 +5110,7 @@
       <pose>-3 1 -0.001057 -1e-06 -0.00043 0</pose>
     </model>
     <model name='b7'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -5657,6 +5668,7 @@
       <pose>1 3 -0.001057 -1e-06 -0.00043 0</pose>
     </model>
     <model name='b6'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -6214,6 +6226,7 @@
       <pose>-0.695204 2.22014 -0.001057 -1e-06 -0.00043 0</pose>
     </model>
     <model name='b8'>
+      <static>1</static>
       <frame name='wooden_case::__model__' attached_to='wooden_case::base'>
         <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
       </frame>
@@ -7336,9 +7349,422 @@
       </link>
       <pose>-0.265051 1.04312 0 0 -0 0</pose>
     </model>
+    <model name='t5'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision_pole'>
+          <pose>0 0 4.572 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0779475</radius>
+              <length>9.144</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='collision_cross'>
+          <pose>0 -0.098806 8.04836 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.11606 0.041763 0.177806</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://telephone_pole/meshes/telephone_pole.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.265051 1.04312 0 0 -0 0</pose>
+    </model>
+    <model name='t6'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision_pole'>
+          <pose>0 0 4.572 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0779475</radius>
+              <length>9.144</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='collision_cross'>
+          <pose>0 -0.098806 8.04836 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.11606 0.041763 0.177806</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://telephone_pole/meshes/telephone_pole.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.265051 1.04312 0 0 -0 0</pose>
+    </model>
+    <model name='t7'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision_pole'>
+          <pose>0 0 4.572 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0779475</radius>
+              <length>9.144</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='collision_cross'>
+          <pose>0 -0.098806 8.04836 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.11606 0.041763 0.177806</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://telephone_pole/meshes/telephone_pole.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.265051 1.04312 0 0 -0 0</pose>
+    </model>
+    <model name='t8'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision_pole'>
+          <pose>0 0 4.572 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0779475</radius>
+              <length>9.144</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='collision_cross'>
+          <pose>0 -0.098806 8.04836 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.11606 0.041763 0.177806</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://telephone_pole/meshes/telephone_pole.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.265051 1.04312 0 0 -0 0</pose>
+    </model>
+    <model name='t9'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision_pole'>
+          <pose>0 0 4.572 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0779475</radius>
+              <length>9.144</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='collision_cross'>
+          <pose>0 -0.098806 8.04836 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.11606 0.041763 0.177806</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://telephone_pole/meshes/telephone_pole.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.265051 1.04312 0 0 -0 0</pose>
+    </model>
+    <model name='t10'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision_pole'>
+          <pose>0 0 4.572 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0779475</radius>
+              <length>9.144</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='collision_cross'>
+          <pose>0 -0.098806 8.04836 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.11606 0.041763 0.177806</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://telephone_pole/meshes/telephone_pole.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.265051 1.04312 0 0 -0 0</pose>
+    </model>
+    <model name='t0'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision_pole'>
+          <pose>0 0 4.572 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0779475</radius>
+              <length>9.144</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='collision_cross'>
+          <pose>0 -0.098806 8.04836 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>2.11606 0.041763 0.177806</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://telephone_pole/meshes/telephone_pole.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>-0.265051 1.04312 0 0 -0 0</pose>
+    </model>
 
     <plugin name='gazebo_ros_state' filename='libgazebo_ros_state.so'>
-      <update_rate>1.0</update_rate>
+      <update_rate>0.2</update_rate>
     </plugin>
 
   </world>

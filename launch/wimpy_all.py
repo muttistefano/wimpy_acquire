@@ -127,7 +127,7 @@ def generate_launch_description():
 
     nodes_to_start = [
         gazebo_server,
-        rviz_node,
+        # rviz_node,
         TimerAction(
             period=2.0,
             actions=[tf_sw1],
