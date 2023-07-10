@@ -42,13 +42,17 @@ class Acquire_class(Node):
             depth=1
         )
 
-        self.service_cb   = MutuallyExclusiveCallbackGroup()
-        self.time_cb      = MutuallyExclusiveCallbackGroup()
-        # self.subscription = self.create_subscription(LaserScan,'/front_laser_plugin/out',self.listener_callback,qos_profile)
-        self.publisher_   = self.create_publisher(Twist, 'custom_cmd_vel', 1)
-        # self.timer        = self.create_timer(1, self.move_robot,callback_group=self.time_cb)
-        self.shuffle_srv  = self.create_client(SetEntityState, '/set_entity_state',callback_group=self.service_cb)
+        # self.service_cb   = MutuallyExclusiveCallbackGroup()
+        # self.time_cb      = MutuallyExclusiveCallbackGroup()
+        # self.sub_cb       = MutuallyExclusiveCallbackGroup()
+        # self.subscription = self.create_subscription(LaserScan,'/front_laser_plugin/out',self.listener_callback,qos_profile,callback_group=self.sub_cb)
+        # self.publisher_   = self.create_publisher(Twist, 'custom_cmd_vel', 1,callback_group=self.time_cb)
+        # self.shuffle_srv  = self.create_client(SetEntityState, '/set_entity_state',callback_group=self.service_cb)
         
+        self.subscription = self.create_subscription(LaserScan,'/front_laser_plugin/out',self.listener_callback,qos_profile)
+        self.publisher_   = self.create_publisher(Twist, 'custom_cmd_vel', 1)
+        self.shuffle_srv  = self.create_client(SetEntityState, '/set_entity_state')
+
         self.laser_log_   = [None] * 10
         self.cnt_         = 0
         self.save_cnt_    = 0
@@ -57,8 +61,8 @@ class Acquire_class(Node):
 
         fld_cnt_trial   = len(os.listdir("/home/blanker/wimpy/src/wimpy_acquire/logs/"))
         self.trial_root = "/home/blanker/wimpy/src/wimpy_acquire/logs/trial" + str(fld_cnt_trial)
-        os. mkdir(self.trial_root)
-
+        os.mkdir(self.trial_root)
+        print("creating folder: ", self.trial_root)
         self.curr_tf_     = [0,0,0]
         self.pos_         = [0,0,0]
         self.run_th = threading.Thread(target=self.run)
@@ -91,15 +95,18 @@ class Acquire_class(Node):
         msg.linear.y  = 0.0
         msg.angular.z = 0.0
         self.publisher_.publish(msg)
+        now = time.time()
+        while (time.time()-now)<0.03:
+            self.publisher_.publish(msg)
+            time.sleep(0.002)
 
     def move_robot(self):
-        print("moving")
         msg = Twist()
-        new_pos = [uniform(-0.05, 0.05),uniform(-0.05, 0.05),uniform(-0.05, 0.05)]
+        new_pos = [uniform(-0.1, 0.1),uniform(-0.1, 0.1),uniform(-0.1, 0.1)]
 
-        x_vel = (self.pos_[0] - new_pos[0])/0.2
-        y_vel = (self.pos_[1] - new_pos[1])/0.2
-        z_vel = (self.pos_[2] - new_pos[2])/0.2
+        x_vel = (self.pos_[0] - new_pos[0])/0.3
+        y_vel = (self.pos_[1] - new_pos[1])/0.3
+        z_vel = (self.pos_[2] - new_pos[2])/0.3
 
         msg.linear.x  = x_vel
         msg.linear.y  = y_vel
@@ -107,9 +114,9 @@ class Acquire_class(Node):
         msg.angular.z = z_vel
 
         now = time.time()
-        while (time.time()-now)<0.02:
+        while (time.time()-now)<0.03:
             self.publisher_.publish(msg)
-            time.sleep(0.001)
+            time.sleep(0.002)
         self.stop_move()
 
         try:
@@ -124,7 +131,6 @@ class Acquire_class(Node):
         
         ang_w = euler_from_quaternion([trans.transform.rotation.x,trans.transform.rotation.y,trans.transform.rotation.z,trans.transform.rotation.w])[2]
         self.curr_tf_ = [trans.transform.translation.x,trans.transform.translation.y,ang_w]
-        print("moved")
         self.log_data()
         self.pos_ = new_pos
         time.sleep(0.1)
@@ -132,34 +138,37 @@ class Acquire_class(Node):
     def shuffle(self):
         # self.fld_cnt = len(os.listdir("/home/blanker/wimpy/src/wimpy_acquire/logs/"))
         self.act_folder = str(self.trial_root) + "/" + str(self.fld_cnt)
-        os. mkdir(self.act_folder)
+        print("creating folder: ", self.act_folder)
+        os.mkdir(self.act_folder)
         self.fld_cnt = self.fld_cnt + 1
         self.save_cnt_ = 0
         print("shuffle")
 
         req = SetEntityState.Request()
-        for el in range(10):
+        for el in range(12):
             req.state.name = "b" + str(el)  
-            req.state.pose.position.x = uniform(-6, 6)
-            req.state.pose.position.y = uniform(1.0, 4)
+            req.state.pose.position.x = uniform(-8, 8)
+            req.state.pose.position.y = uniform(1.5, 7)
             q = quaternion_from_euler(0, 0, uniform(-3.14,3.14))
             req.state.pose.orientation.w = q[3]
             req.state.pose.orientation.x = q[0]
             req.state.pose.orientation.y = q[1]
             req.state.pose.orientation.z = q[2]
             resp = self.shuffle_srv.call(req)
-            time.sleep(0.02)
-        for el in range(10):
+            time.sleep(0.1)
+        for el in range(11):
             req.state.name = "t" + str(el)  
             req.state.pose.position.x = uniform(-6, 6)
             req.state.pose.position.y = uniform(1.0, 4)
             resp = self.shuffle_srv.call(req)
-            time.sleep(0.02)
+            time.sleep(0.1)
         print("shuffle ended")
         time.sleep(1)
 
     def run(self):
-        while rclpy.ok():
+        # while rclpy.ok():
+        for i in range(1000):
+            time.sleep(2)
             self.shuffle()
             for i in range(100):
                 self.move_robot()
@@ -171,15 +180,11 @@ def main():
     rclpy.init()
     
     node = Acquire_class()
+    executor = MultiThreadedExecutor()
+    executor.add_node(node)
 
-    # executor = MultiThreadedExecutor()
-    # executor.add_node(node)
-    minimal_publisher = Acquire_class()
-
-    rclpy.spin(minimal_publisher)
     try:
-        # rclpy.spin(node)
-        minimal_publisher.spin()
+        executor.spin()
     # except KeyboardInterrupt:
     #     node.stop_move()
     finally:

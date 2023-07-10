@@ -1,1 +1,9 @@
 logs
+dock_err
+dock_err_bkp
+scripts/pre_process
+scripts/fine_tune
+RealData
+meshes
+
+
